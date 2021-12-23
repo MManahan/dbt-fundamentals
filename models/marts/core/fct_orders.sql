@@ -4,6 +4,7 @@ WITH orders_agg AS (
          , sum(amount) as amount
     FROM 
         {{ ref('stg_payments') }}
+    WHERE payment_status = 'success'
     GROUP BY 1
 ),
 
@@ -18,7 +19,7 @@ orders AS (
 SELECT
     o.order_id
      , o.customer_id
-     , oa.amount
+     , coalesce(oa.amount,0) as amount
 FROM 
     orders as o 
 LEFT JOIN
