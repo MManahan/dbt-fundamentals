@@ -1,9 +1,3 @@
-{{
-  config(
-    materialized='table'
-  )
-}}
-
 with payment as (
     select 
         id as payment_id
