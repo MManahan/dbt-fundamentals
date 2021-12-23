@@ -4,8 +4,6 @@ WITH orders_agg AS (
          , sum(amount) as amount
     FROM 
         {{ ref('stg_payments') }}
-    WHERE 
-        payment_status = 'success'
     GROUP BY 1
 ),
 
